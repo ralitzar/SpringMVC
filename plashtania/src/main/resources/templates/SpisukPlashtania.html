@@ -11,6 +11,16 @@
 <link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="payments" src="/images/payments-logo.png" />
+                </a>
+            </div>
+        </div>
+</nav>
+
 <div class="panel panel-default" style="margin: 10px">
 	<div class="panel-heading">
 		<h1 class="panel-title">Списък с плащания</h1>
@@ -21,11 +31,31 @@
 				<tr>
 					<th>№</th>
 					<th>Описание</th>
+					<th>Падежна дата</th>
+					<th>Сума</th>
+					<th>Състояние</th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Апартамент 1 - месечна такса</td>
+					<td>09.03.2019</td>
+					<td>12</td>
+					<td>Неплатена</td>
+					<td></td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 </div>
+<footer class="aw-layout-footer  js-content">
+		<div class="container-fluid">
+			<span class="aw-footer-disclaimer">&copy; 2019 Ralitza Raynova. Modern WEB systems with Spring MVC</span>
+		</div>
+	</footer>
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
