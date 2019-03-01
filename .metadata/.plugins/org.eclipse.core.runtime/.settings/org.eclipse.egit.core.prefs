@@ -1,5 +1,6 @@
 GitRepositoriesView.GitDirectories=C\:\\Users\\Ralit\\git\\SpringMVC\\.git;
-GitRepositoriesView.GitDirectories.relative=C\:\\Users\\Ralit\\git\\SpringMVC\\.git;
-RepositorySearchDialogSearchPath=C\:\\Users\\Ralit\\Documents\\workspace-springMVC1
+GitRepositoriesView.GitDirectories.relative=.git;
+RepositorySearchDialogDeepSearch=true
+RepositorySearchDialogSearchPath=C\:\\Users\\Ralit\\git\\SpringMVC
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1
