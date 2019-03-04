@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+
 @Entity
 public class Plashtane implements Serializable{
 
@@ -24,9 +27,11 @@ public class Plashtane implements Serializable{
 	
 	private String opisanie;
 	
+	@DateTimeFormat(pattern = "dd.MM.yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date padezhnaData;
 	
+	@NumberFormat(pattern="#,##0.00")
 	private BigDecimal suma;
 	
 	@Enumerated(EnumType.STRING)
@@ -44,11 +49,11 @@ public class Plashtane implements Serializable{
 	public void setOpisanie(String opisanie) {
 		this.opisanie = opisanie;
 	}
-	public Date getPadeshnaData() {
+	public Date getPadezhnaData() {
 		return padezhnaData;
 	}
-	public void setPadeshnaData(Date padeshnaData) {
-		this.padezhnaData = padeshnaData;
+	public void setPadezhnaData(Date padezhnaData) {
+		this.padezhnaData = padezhnaData;
 	}
 	public BigDecimal getSuma() {
 		return suma;

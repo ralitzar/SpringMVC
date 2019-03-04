@@ -3,7 +3,8 @@ package com.ralitzaraynova.plashtania.model;
 public enum SustoyaniePlashtane {
 	
 	PLATENO ("Платено"),
-	NEPLATENO ("Неплатено");
+	NEPLATENO ("Неплатено"),
+	OPROSTENO ("Oпростено");
 	
 	private String opisanie;
 	

@@ -9,6 +9,7 @@
 
 <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 <link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-static-top">
@@ -20,7 +21,10 @@
             </div>
         </div>
 </nav>
-<form class="form-horizontal" method="POST" action="/payments">
+<form class="form-horizontal" method="POST" action="/plashtania">
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
+    		<span th:text="${message}">Плащането е запазено успешно !</span>
+		</div>
     	<div class="panel panel-default">
     		<div class="panel-heading">
     			<h1 class="panel-title">Ново плащане</h1>
@@ -39,18 +43,20 @@
 						<input type="text" class="form-control"	id="padezhnaData" name="padezhnaData"/>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" >
 					<label for="suma" class="col-sm-2 control-label">Сума</label>
-					<div class="col-sm-2">   
-						<input type="text" class="form-control" id="suma" name="suma"/>
+					<div class="col-sm-2">
+						<div class="input-group" >
+  						  <span class="input-group-addon">лв.</span>
+  						  <input type="text" class="form-control" id="suma" name="suma">
+  						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="sustoyanie" class="col-sm-2 control-label">Състояние</label>
 					<div class="col-sm-2">
 						<select class="form-control" name="sustoyanie">
-							<option value="NEPLATENO">Неплатено</option>
-							<option value="PLATENO">Платено</option>
+							<option th:each="sustoyanie:${sustoyania}" th:value="${sustoyanie}" th:text="${sustoyanie.opisanie}"></option>
                     	</select>
                     </div>
 				</div>
@@ -62,9 +68,9 @@
 			</div>
     	</div>
 	</form>
-	<footer class="aw-layout-footer  js-content">
+	<footer class="js-content">
 		<div class="container-fluid">
-			<span class="aw-footer-disclaimer">&copy; 2019 Ralitza Raynova. Modern WEB systems with Spring MVC</span>
+			<span class="d-none d-sm-inline-block">&copy; 2019 Ralitza Raynova. Modern WEB systems with Spring MVC</span>
 		</div>
 	</footer>
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>

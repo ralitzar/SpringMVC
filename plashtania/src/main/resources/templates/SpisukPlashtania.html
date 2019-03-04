@@ -39,13 +39,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>Апартамент 1 - месечна такса</td>
-					<td>09.03.2019</td>
-					<td>12</td>
-					<td>Неплатена</td>
-					<td></td>
+				<tr th:each="plastane:${plashtania}">
+					<td th:text ="${plastane.kod}"></td>
+					<td th:text ="${plastane.opisanie}"></td>
+					<td th:text ="${plastane.padezhnaData}"></td>
+					<td th:text ="${plastane.suma}"></td>
+					<td th:text ="${plastane.sustoyanie}"></td>
 				</tr>
 			</tbody>
 		</table>
