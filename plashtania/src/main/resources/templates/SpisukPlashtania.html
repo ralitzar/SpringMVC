@@ -1,61 +1,49 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="Layout.html">
+	  
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width" />
-
-<title>Списък с плащания</title>
-
-<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
-<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
+	<title>Списък с плащания</title>
 </head>
-<body>
-<nav class="navbar navbar-inverse navbar-static-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <img alt="payments" src="/images/payments-logo.png" />
-                </a>
-            </div>
-        </div>
-</nav>
+<section layout:fragment="content">
 
-<div class="panel panel-default" style="margin: 10px">
-	<div class="panel-heading">
-		<h1 class="panel-title">Списък с плащания</h1>
+<div class="card card-default" style="margin: 10px">
+	<div class="card-header clearfix">
+		<h5 class="card-title float-left">Плащания</h5>
+		<a class="btn btn-link float-right" th:href="@{/plashtania/novo}">Ново плащане</a>
 	</div>
-	<div class="panel-body">
-		<table class="table">
+	<div class="card-body">
+		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th>№</th>
-					<th>Описание</th>
-					<th>Падежна дата</th>
-					<th>Сума</th>
-					<th>Състояние</th>
-					<th></th>
+					<th class = "text-center">№</th>
+					<th class = "text-center">Описание</th>
+					<th class = "text-center">Падежна дата</th>
+					<th class = "text-center">Сума</th>
+					<th class = "text-center">Състояние</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="plastane:${plashtania}">
-					<td th:text ="${plastane.kod}"></td>
+					<td class = "text-center" th:text ="${plastane.kod}"></td>
 					<td th:text ="${plastane.opisanie}"></td>
-					<td th:text ="${plastane.padezhnaData}"></td>
-					<td th:text ="${plastane.suma}"></td>
-					<td th:text ="${plastane.sustoyanie}"></td>
+					<td class = "text-center" th:text ="${{plastane.padezhnaData}}"></td>
+					<td class = "text-right" th:text ="|${{plastane.suma}} лв.|"></td>
+					<td class = "text-center" >
+						<span class="badge" th:text ="${plastane.sustoyanie.opisanie}"
+						th:classappend="${plastane.neplateno ? 'badge-danger' : 'badge-success'}"></span>
+					</td>
+					<td class = "text-center"></td>
+				</tr>
+				<tr>
+					<td colspan="6" th:if="${#lists.isEmpty(plashtania)}">Няма намерени плащания</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
-<footer class="aw-layout-footer  js-content">
-		<div class="container-fluid">
-			<span class="aw-footer-disclaimer">&copy; 2019 Ralitza Raynova. Modern WEB systems with Spring MVC</span>
-		</div>
-	</footer>
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-</body>
+</section>
 </html>

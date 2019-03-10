@@ -1,12 +1,20 @@
 .navbar-brand {
 	padding-top: 12px;
 }
-.panel-default {
+.card-default {
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	
+}
+
+.alert {
+	margin-top: 10px;
 	margin-left: 10px;
 	margin-right: 10px;
 }
 
-.alert {
-	margin-left: 10px;
-	margin-right: 10px;
+.has-error {
+  background-color: #ffdddd;
+  border-color: #800000;
 }

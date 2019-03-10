@@ -1,79 +1,77 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="Layout.html">
+	
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width" />
-
-<title>Ново плащане</title>
-
-<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
-<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+	<title>Ново плащане</title>
 </head>
-<body>
-<nav class="navbar navbar-inverse navbar-static-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <img alt="payments" src="/images/payments-logo.png" />
-                </a>
-            </div>
-        </div>
-</nav>
-<form class="form-horizontal" method="POST" action="/plashtania">
+<section layout:fragment="content">
+
+	<form method="POST" action="/plashtania/novo" th:object="${plashtane}">
 		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
     		<span th:text="${message}">Плащането е запазено успешно !</span>
 		</div>
-    	<div class="panel panel-default">
-    		<div class="panel-heading">
-    			<h1 class="panel-title">Ново плащане</h1>
+		<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+			<div th:each="detailedError : ${#fields.detailedErrors()}">
+				<span th:text="${detailedError.message}"></span>
+			</div>
+		</div>
+		
+    	<div class="card card-default" >
+    		<div class="card-header clearfix">
+	   			<h5 class="card-title float-left">Ново плащане</h5>
+	   			<a class="btn btn-link float-right" th:href="@{/plashtania}">Плащания</a>
     		</div>
-    		
-    		<div class="panel-body">
-				<div class="form-group">
-					<label for="opisanie" class="col-sm-2 control-label">Описание</label>
-					<div class="col-sm-4"> 
-						<input type="text" class="form-control" id="opisanie" name="opisanie"/>
+
+    		<div class="card-body">
+				<div class="form-group row">
+					<label for="opisanie" class="col-sm-2 col-form-label">Описание</label>
+					<div class="col-sm-6"> 
+						<input type="text" class="form-control" id="opisanie" th:field="*{opisanie}" 
+						th:classappend="${#fields.hasErrors('opisanie')}? is-invalid" />
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group row">
 					<label for="padezhnaData" class="col-sm-2 control-label">Падежна дата</label>
-					<div class="col-sm-2">  
-						<input type="text" class="form-control"	id="padezhnaData" name="padezhnaData"/>
+					<div class="col-sm-6">  
+						<input type="text" class="form-control"	id="padezhnaData" th:field="*{padezhnaData}"
+						data-provide="datepicker" data-date-format="dd.mm.yyyy" data-date-language="bg"
+						data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="right"
+						th:classappend="${#fields.hasErrors('padezhnaData')}? is-invalid"/>
 					</div>
 				</div>
-				<div class="form-group" >
+				<div class="form-group row">
 					<label for="suma" class="col-sm-2 control-label">Сума</label>
-					<div class="col-sm-2">
-						<div class="input-group" >
-  						  <span class="input-group-addon">лв.</span>
-  						  <input type="text" class="form-control" id="suma" name="suma">
+					<div class="col-sm-6">
+						<div class="input-group mb-3" >
+  						  <input type="text" class="form-control js-currency" id="suma" th:field="*{suma}"
+  						         th:classappend="${#fields.hasErrors('suma')}? is-invalid" />
+  						  	<div class="input-group-append">
+    							<span class="input-group-text " id="basic-addon2">лв.</span>
+  							</div>
   						</div>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group row" >
 					<label for="sustoyanie" class="col-sm-2 control-label">Състояние</label>
-					<div class="col-sm-2">
-						<select class="form-control" name="sustoyanie">
+					<div class="col-sm-6">
+						<select class="form-control" th:field="*{sustoyanie}">
 							<option th:each="sustoyanie:${sustoyania}" th:value="${sustoyanie}" th:text="${sustoyanie.opisanie}"></option>
                     	</select>
                     </div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">Запази</button>
+				<div class="form-group row ">
+					<div class="col-sm-2"> </div>
+					<div class="col col-sm-6">
+						<button type="submit" class="btn btn-dark ">Запази</button>
 					</div>
+					
 				</div>
 			</div>
-    	</div>
-	</form>
-	<footer class="js-content">
-		<div class="container-fluid">
-			<span class="d-none d-sm-inline-block">&copy; 2019 Ralitza Raynova. Modern WEB systems with Spring MVC</span>
-		</div>
-	</footer>
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-</body>
+		  </div>
+		</form>
+</section>
+
 </html>

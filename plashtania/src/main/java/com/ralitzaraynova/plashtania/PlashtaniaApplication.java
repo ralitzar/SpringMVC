@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.FixedLocaleResolver;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
+
 @SpringBootApplication
 public class PlashtaniaApplication {
 
@@ -17,6 +19,10 @@ public class PlashtaniaApplication {
 	
 	@Bean
 	public LocaleResolver localeResolver() {
-		return new FixedLocaleResolver(new Locale("bg", "BG"));
+		return new FixedLocaleResolver(new Locale("bg-BG"));
 	}
+    @Bean
+    public LayoutDialect layoutDialect() {
+        return new LayoutDialect();
+    }
 }

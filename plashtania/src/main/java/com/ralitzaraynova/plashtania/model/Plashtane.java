@@ -12,6 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
@@ -25,12 +30,18 @@ public class Plashtane implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long kod;
 	
+	@NotBlank (message = "Моля въведете описание")
+	@Size(max = 120, message = "Описанието не може да съдържа павече от 120 символа.")
 	private String opisanie;
 	
+	@NotNull (message = "Моля въведете падежна дата")
 	@DateTimeFormat(pattern = "dd.MM.yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date padezhnaData;
 	
+	@NotNull(message = "Моля въведете сума")
+	@DecimalMin(value = "0.01", message = "Сумата не може да бъде по-малка от 0,01")
+	@DecimalMax(value = "9999999.99", message = "Сумата не може да бъде по-голяма от 9.999.999,99")
 	@NumberFormat(pattern="#,##0.00")
 	private BigDecimal suma;
 	
@@ -66,6 +77,10 @@ public class Plashtane implements Serializable{
 	}
 	public void setSustoyanie(SustoyaniePlashtane sustoyanie) {
 		this.sustoyanie = sustoyanie;
+	}
+	
+	public boolean isNeplateno() {
+		return SustoyaniePlashtane.NEPLATENO.equals(this.sustoyanie);
 	}
 	
 	@Override
