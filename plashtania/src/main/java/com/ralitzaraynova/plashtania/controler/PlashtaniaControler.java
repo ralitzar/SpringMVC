@@ -9,8 +9,10 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -47,6 +49,20 @@ public class PlashtaniaControler {
 		ModelAndView mv = new ModelAndView("SpisukPlashtania");
 		mv.addObject("plashtania",plashtania.findAll());
 		return mv;
+	}
+	
+	@GetMapping("{kod}")
+	public ModelAndView promeni(@PathVariable ("kod") Plashtane plashtane) {
+		ModelAndView mv = new ModelAndView("NovoPlashtane");
+		mv.addObject(plashtane);
+		return mv;
+	}
+	
+	@RequestMapping(value= "{kod}", method=RequestMethod.DELETE)
+	public String iztrii(@PathVariable ("kod") Long kod, RedirectAttributes attributes) {
+		plashtania.deleteById(kod);
+		attributes.addFlashAttribute("message", "Плащането е изтрито успешно!");
+		return "redirect:/plashtania";
 	}
 	
 	@ModelAttribute("sustoyania")

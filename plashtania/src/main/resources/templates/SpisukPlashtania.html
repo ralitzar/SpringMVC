@@ -2,13 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorator="Layout.html">
+	  layout:decorate="Layout.html">
 	  
 <head>
 	<title>Списък с плащания</title>
 </head>
 <section layout:fragment="content">
-
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
+    		<span th:text="${message}">Плащането е запазено успешно !</span>
+		</div>
 <div class="card card-default" style="margin: 10px">
 	<div class="card-header clearfix">
 		<h5 class="card-title float-left">Плащания</h5>
@@ -36,7 +38,16 @@
 						<span class="badge" th:text ="${plastane.sustoyanie.opisanie}"
 						th:classappend="${plastane.neplateno ? 'badge-danger' : 'badge-success'}"></span>
 					</td>
-					<td class = "text-center"></td>
+					<td class = "text-center">
+						<a class="btn btn-link btn-xs" th:href="@{/plashtania/{kod}(kod=${plastane.kod})}"
+							title="Редактирай" rel="tooltip" data-placement="top">
+	   						<i class="far fa-edit"></i></a>
+						<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmationModal"
+								th:attr="data-kod=${plastane.kod}, data-opisanie=${plastane.opisanie}"
+								title="Изтрий" rel="tooltip" data-placement="top">
+	   						<i class="far fa-trash-alt"></i>
+	   					</a>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="6" th:if="${#lists.isEmpty(plashtania)}">Няма намерени плащания</td>
@@ -44,6 +55,7 @@
 			</tbody>
 		</table>
 	</div>
+	<div th:insert="ConfirmationModal"></div>
 </div>
 </section>
 </html>

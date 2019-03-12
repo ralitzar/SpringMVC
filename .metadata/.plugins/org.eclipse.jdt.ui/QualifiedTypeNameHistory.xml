@@ -40,4 +40,7 @@
 <fullyQualifiedTypeName name="javax.validation.constraints.DecimalMin"/>
 <fullyQualifiedTypeName name="javax.validation.constraints.DecimalMax"/>
 <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.support.RedirectAttributes"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
 </qualifiedTypeNameHistroy>
